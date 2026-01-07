@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Happy Birthday Mariyam!</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
@@ -51,10 +51,14 @@
         @media (max-width: 1024px) {
             .main-container {
                 grid-template-columns: 1fr;
+                padding: 1rem;
             }
             .photo-gallery-aside {
                 order: 2;
                 margin-top: 2rem;
+                flex-direction: row !important;
+                flex-wrap: wrap;
+                justify-content: center;
             }
         }
 
@@ -67,6 +71,22 @@
             justify-content: flex-end;
             height: 400px;
             width: 100%;
+        }
+
+        /* MOBILE SCALING FOR THE ENTIRE SCENE */
+        @media (max-width: 480px) {
+            .celebration-scene {
+                transform: scale(0.8);
+                height: 320px;
+                transform-origin: bottom center;
+            }
+            .main-container {
+                padding: 0.5rem;
+                gap: 1rem;
+            }
+            h1 {
+                font-size: 2.75rem !important; /* Adjust header for mobile */
+            }
         }
 
         /* Photo Gallery Styling */
@@ -297,23 +317,19 @@
 </head>
 <body class="flex flex-col items-center p-4">
 
-    <!-- Header -->
     <div class="text-center mb-4 z-10 w-full">
-        <h1 class="text-6xl md:text-8xl text-pink-500 cursive mb-4 drop-shadow-md">
+        <h1 class="text-5xl md:text-8xl text-pink-500 cursive mb-4 drop-shadow-md">
             Happy Birthday Mariyam!
         </h1>
         <div class="inline-block bg-white shadow-sm px-6 py-2 rounded-full">
-            <p class="text-pink-400 font-bold">A special day for a special person! ✨</p>
+            <p class="text-pink-400 font-bold text-sm md:text-base">A special day for a special person! ✨</p>
         </div>
     </div>
 
-    <!-- Main Content Area -->
     <div class="main-container">
         
-        <!-- Left Section: Main Scene -->
-        <div class="flex flex-col items-center">
+        <div class="flex flex-col items-center w-full">
             <div class="celebration-scene">
-                <!-- Cat (Behind) -->
                 <div class="cat-container" id="birthday-cat">
                     <div class="cat">
                         <div class="ear left"><div class="ear-inner"></div></div>
@@ -327,13 +343,11 @@
                         <div class="absolute top-[105px] left-1/2 -translate-x-1/2 text-gray-400 font-bold text-lg">w</div>
                         
                         <div class="photo-frame">
-                            <!-- PASTE MAIN IMAGE URL IN SRC BELOW -->
                             <img id="user-photo" src="https://via.placeholder.com/150?text=Mariyam" alt="Mariyam">
                         </div>
                     </div>
                 </div>
 
-                <!-- Cake (Front) -->
                 <div class="cake-container">
                     <div class="cake-layer-top">
                         <div class="drip" style="left: 15px; height: 18px;"></div>
@@ -353,32 +367,28 @@
                          <div class="drip" style="left: 220px; height: 40px;"></div>
                     </div>
                 </div>
-                <div class="w-[400px] h-10 bg-pink-200 rounded-full shadow-lg border-b-8 border-pink-300/50"></div>
+                <div class="max-w-full w-[400px] h-10 bg-pink-200 rounded-full shadow-lg border-b-8 border-pink-300/50"></div>
             </div>
 
-            <!-- Controls -->
             <div class="mt-8 flex space-x-4 z-10 flex-wrap justify-center gap-y-4">
-                <button onclick="addBalloon()" class="bg-blue-400 hover:bg-blue-500 text-white font-bold py-3 px-8 rounded-2xl shadow-xl transition transform hover:-translate-y-1 active:scale-95">
+                <button onclick="addBalloon()" class="bg-blue-400 hover:bg-blue-500 text-white font-bold py-3 px-6 md:px-8 rounded-2xl shadow-xl transition transform hover:-translate-y-1 active:scale-95 text-sm md:text-base">
                     🎈 More Balloons
                 </button>
-                <button onclick="meow()" class="bg-pink-400 hover:bg-pink-500 text-white font-bold py-3 px-8 rounded-2xl shadow-xl transition transform hover:-translate-y-1 active:scale-95">
+                <button onclick="meow()" class="bg-pink-400 hover:bg-pink-500 text-white font-bold py-3 px-6 md:px-8 rounded-2xl shadow-xl transition transform hover:-translate-y-1 active:scale-95 text-sm md:text-base">
                     🐱 Meow!
                 </button>
             </div>
         </div>
 
-        <!-- Right Section: Photo Gallery Corner -->
         <aside class="photo-gallery-aside">
             <h3 class="cursive text-2xl text-pink-400">Beautiful Moments</h3>
             
             <div class="polaroid" style="--rot: -5deg">
-                <!-- PASTE GALLERY IMAGE 1 URL IN SRC BELOW -->
                 <img id="gal1-img" src="https://via.placeholder.com/150?text=Moment+1" alt="Moment 1">
                 <p class="text-center mt-2 text-xs text-pink-400 font-bold cursive">Sweetest</p>
             </div>
 
             <div class="polaroid" style="--rot: 4deg">
-                <!-- PASTE GALLERY IMAGE 2 URL IN SRC BELOW -->
                 <img id="gal2-img" src="https://via.placeholder.com/150?text=Moment+2" alt="Moment 2">
                 <p class="text-center mt-2 text-xs text-pink-400 font-bold cursive">Cutest</p>
             </div>
@@ -387,11 +397,10 @@
         </aside>
     </div>
 
-    <!-- Overlay -->
     <div id="message-box">
-        <div class="text-6xl mb-4">✨🎂✨</div>
-        <h2 class="text-4xl text-pink-500 cursive mb-4">Hooray, Mariyam!</h2>
-        <p class="text-gray-600 text-lg leading-relaxed mb-8">
+        <div class="text-5xl md:text-6xl mb-4">✨🎂✨</div>
+        <h2 class="text-3xl md:text-4xl text-pink-500 cursive mb-4">Hooray, Mariyam!</h2>
+        <p class="text-gray-600 text-base md:text-lg leading-relaxed mb-8">
             You lit all the candles! Wishing you a purr-fectly wonderful year filled with love, laughter, and everything sweet! 🐾💖
         </p>
         <button onclick="closeMessage()" class="bg-gradient-to-r from-pink-400 to-pink-500 text-white font-bold py-3 px-12 rounded-full shadow-lg hover:brightness-110 transition uppercase tracking-widest">
@@ -400,11 +409,10 @@
     </div>
 
     <script>
-        // CONFIGURATION: SET YOUR IMAGE PATHS HERE
         const IMAGE_PATHS = {
-            main: "https://via.placeholder.com/150?text=Mariyam", // Main circular photo
-            moment1: "download_imresizer.jpg", // Top polaroid
-            moment2: "birthdayinspiration_imresizer.jpg"  // Bottom polaroid
+            main: "https://via.placeholder.com/150?text=Mariyam", 
+            moment1: "download_imresizer.jpg", 
+            moment2: "birthdayinspiration_imresizer.jpg"  
         };
 
         const colors = ['#FF6B6B', '#4ECDC4', '#FFE66D', '#FF9F43', '#A29BFE', '#F78FB3', '#74b9ff'];
@@ -482,10 +490,7 @@
         
         window.onload = () => { 
             loadImages();
-            
-            // CONFIGURATION: CHANGE THIS NUMBER TO INCREASE INITIAL BALLOONS
-            const initialBalloonCount = 60; 
-            
+            const initialBalloonCount = 30; // Lowered for better mobile performance
             for(let i=0; i < initialBalloonCount; i++) {
                 setTimeout(addBalloon, i * 600); 
             }
