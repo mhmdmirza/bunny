@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Mariyam!</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@400;700&display=swap');
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background: linear-gradient(135deg, #fff5f7 0%, #fce4ec 100%);
+            overflow-x: hidden;
+            touch-action: manipulation;
+            min-height: 100vh;
+        }
+
+        .cursive {
+            font-family: 'Pacifico', cursive;
+        }
+
+        /* Balloon Animation */
+        @keyframes float {
+            0% { transform: translateY(110vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-120vh) rotate(360deg); opacity: 0; }
+        }
+
+        .balloon {
+            position: absolute;
+            bottom: -100px;
+            width: 50px;
+            height: 70px;
+            border-radius: 50%;
+            animation: float 8s linear infinite;
+            z-index: 5;
+            box-shadow: inset -5px -5px 10px rgba(0,0,0,0.1);
+        }
+
+        /* Layout Grid */
+        .main-container {
+            display: grid;
+            grid-template-columns: 1fr 350px;
+            gap: 2rem;
+            width: 100%;
+            max-width: 1400px;
+            padding: 2rem;
+            align-items: center;
+        }
+
+        @media (max-width: 1024px) {
+            .main-container {
+                grid-template-columns: 1fr;
+            }
+            .photo-gallery-aside {
+                order: 2;
+                margin-top: 2rem;
+            }
+        }
+
+        /* The Scene Container */
+        .celebration-scene {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-end;
+            height: 400px;
+            width: 100%;
+        }
+
+        /* Photo Gallery Styling */
+        .photo-gallery-aside {
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(10px);
+            border-radius: 2rem;
+            padding: 1.5rem;
+            border: 2px dashed #fce4ec;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            align-items: center;
+            box-shadow: 0 10px 30px rgba(255, 128, 171, 0.1);
+        }
+
+        .polaroid {
+            background: white;
+            padding: 10px 10px 25px 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transform: rotate(var(--rot));
+            transition: all 0.3s ease;
+            width: 160px;
+        }
+        .polaroid:hover {
+            transform: rotate(0deg) scale(1.1);
+            z-index: 50;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+        .polaroid img {
+            width: 140px;
+            height: 140px;
+            object-fit: cover;
+            background: #f8f9fa;
+        }
+
+        /* The Cat */
+        .cat-container {
+            position: absolute;
+            bottom: 110px;
+            z-index: 10;
+        }
+
+        .cat {
+            position: relative;
+            width: 200px;
+            height: 270px;
+            background: #ffffff;
+            border-radius: 120px 120px 80px 80px;
+            border: 4px solid #f0f0f0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        .photo-frame {
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 110px;
+            height: 110px;
+            background: #f8f9fa;
+            border: 4px solid white;
+            border-radius: 50%;
+            overflow: hidden;
+            z-index: 15;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .photo-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .cat-spot {
+            position: absolute;
+            background: #ffa726;
+            border-radius: 50%;
+        }
+
+        .ear {
+            position: absolute;
+            top: -25px;
+            width: 55px;
+            height: 70px;
+            background: #ffffff;
+            border: 4px solid #f0f0f0;
+            border-bottom: none;
+            border-radius: 20px 20px 0 0;
+            z-index: -1;
+        }
+        .ear.left { left: 15px; transform: rotate(-20deg); }
+        .ear.right { right: 15px; transform: rotate(20deg); background: #ffa726; }
+        
+        .ear-inner {
+            position: absolute;
+            top: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 25px;
+            height: 35px;
+            background: #ffcdd2;
+            border-radius: 10px;
+        }
+
+        .eye {
+            position: absolute;
+            top: 65px;
+            width: 16px;
+            height: 16px;
+            background: #2d3436;
+            border-radius: 50%;
+            animation: blink 4s infinite;
+        }
+        @keyframes blink { 0%, 90%, 100% { transform: scaleY(1); } 95% { transform: scaleY(0.1); } }
+        .eye.left { left: 45px; }
+        .eye.right { right: 45px; }
+
+        .blush {
+            position: absolute;
+            top: 90px;
+            width: 25px;
+            height: 12px;
+            background: #ff80ab;
+            opacity: 0.3;
+            border-radius: 50%;
+        }
+        .blush.left { left: 25px; }
+        .blush.right { right: 25px; }
+
+        .cake-container {
+            perspective: 1000px;
+            position: relative;
+            z-index: 20;
+            margin-bottom: 10px;
+        }
+
+        .cake-layer {
+            width: 280px;
+            height: 100px;
+            background: #ff80ab;
+            border-radius: 20px 20px 10px 10px;
+            position: relative;
+            box-shadow: 0 10px 0 #f06292, inset 0 -5px 0 rgba(0,0,0,0.1);
+        }
+
+        .cake-layer-top {
+            width: 210px;
+            height: 80px;
+            background: #f48fb1;
+            margin: -55px auto 0;
+            border-radius: 20px 20px 10px 10px;
+            position: relative;
+            box-shadow: 0 5px 0 #ec407a, inset 0 -5px 0 rgba(0,0,0,0.1);
+        }
+
+        .drip {
+            position: absolute;
+            top: 0;
+            width: 20px;
+            height: 32px;
+            background: #ffffff;
+            border-radius: 0 0 20px 20px;
+        }
+
+        .candle-set {
+            position: absolute;
+            top: -45px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        .candle {
+            width: 14px;
+            height: 50px;
+            background: linear-gradient(to bottom, #fff 50%, #64b5f6 50%);
+            border-radius: 4px;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.2s;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .candle:hover { transform: scale(1.1) translateY(-5px); }
+
+        .flame {
+            position: absolute;
+            top: -24px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 18px;
+            height: 28px;
+            background: radial-gradient(circle at center, #fff, #ffeb3b, #ff9800);
+            border-radius: 50% 50% 20% 20%;
+            box-shadow: 0 0 20px #ff9800;
+            animation: flicker 0.1s infinite alternate;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        @keyframes flicker {
+            0% { transform: translateX(-50%) scale(1) rotate(-2deg); }
+            100% { transform: translateX(-50%) scale(1.2) rotate(2deg); }
+        }
+
+        .candle.lit .flame { opacity: 1; }
+
+        #message-box {
+            display: none;
+            background: white;
+            padding: 2.5rem;
+            border-radius: 2.5rem;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.2);
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 200;
+            text-align: center;
+            width: 90%;
+            max-width: 450px;
+            border: 8px solid #fce4ec;
+        }
+    </style>
+</head>
+<body class="flex flex-col items-center p-4">
+
+    <!-- Header -->
+    <div class="text-center mb-4 z-10 w-full">
+        <h1 class="text-6xl md:text-8xl text-pink-500 cursive mb-4 drop-shadow-md">
+            Happy Birthday Mariyam!
+        </h1>
+        <div class="inline-block bg-white shadow-sm px-6 py-2 rounded-full">
+            <p class="text-pink-400 font-bold">A special day for a special person! ✨</p>
+        </div>
+    </div>
+
+    <!-- Main Content Area -->
+    <div class="main-container">
+        
+        <!-- Left Section: Main Scene -->
+        <div class="flex flex-col items-center">
+            <div class="celebration-scene">
+                <!-- Cat (Behind) -->
+                <div class="cat-container" id="birthday-cat">
+                    <div class="cat">
+                        <div class="ear left"><div class="ear-inner"></div></div>
+                        <div class="ear right"><div class="ear-inner"></div></div>
+                        <div class="cat-spot w-16 h-16 -top-2 -right-2"></div>
+                        <div class="eye left"></div>
+                        <div class="eye right"></div>
+                        <div class="blush left"></div>
+                        <div class="blush right"></div>
+                        <div class="absolute top-[90px] left-1/2 -translate-x-1/2 w-6 h-4 bg-pink-300 rounded-full"></div>
+                        <div class="absolute top-[105px] left-1/2 -translate-x-1/2 text-gray-400 font-bold text-lg">w</div>
+                        
+                        <div class="photo-frame">
+                            <!-- PASTE MAIN IMAGE URL IN SRC BELOW -->
+                            <img id="user-photo" src="https://via.placeholder.com/150?text=Mariyam" alt="Mariyam">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cake (Front) -->
+                <div class="cake-container">
+                    <div class="cake-layer-top">
+                        <div class="drip" style="left: 15px; height: 18px;"></div>
+                        <div class="drip" style="left: 65px; height: 35px;"></div>
+                        <div class="drip" style="left: 125px; height: 25px;"></div>
+                        <div class="drip" style="left: 175px; height: 30px;"></div>
+                        <div class="candle-set">
+                            <div class="candle" onclick="toggleCandle(this)"><div class="flame"></div></div>
+                            <div class="candle" onclick="toggleCandle(this)"><div class="flame"></div></div>
+                            <div class="candle" onclick="toggleCandle(this)"><div class="flame"></div></div>
+                        </div>
+                    </div>
+                    <div class="cake-layer">
+                         <div class="drip" style="left: 20px; height: 25px;"></div>
+                         <div class="drip" style="left: 90px; height: 45px;"></div>
+                         <div class="drip" style="left: 160px; height: 35px;"></div>
+                         <div class="drip" style="left: 220px; height: 40px;"></div>
+                    </div>
+                </div>
+                <div class="w-[400px] h-10 bg-pink-200 rounded-full shadow-lg border-b-8 border-pink-300/50"></div>
+            </div>
+
+            <!-- Controls -->
+            <div class="mt-8 flex space-x-4 z-10 flex-wrap justify-center gap-y-4">
+                <button onclick="addBalloon()" class="bg-blue-400 hover:bg-blue-500 text-white font-bold py-3 px-8 rounded-2xl shadow-xl transition transform hover:-translate-y-1 active:scale-95">
+                    🎈 More Balloons
+                </button>
+                <button onclick="meow()" class="bg-pink-400 hover:bg-pink-500 text-white font-bold py-3 px-8 rounded-2xl shadow-xl transition transform hover:-translate-y-1 active:scale-95">
+                    🐱 Meow!
+                </button>
+            </div>
+        </div>
+
+        <!-- Right Section: Photo Gallery Corner -->
+        <aside class="photo-gallery-aside">
+            <h3 class="cursive text-2xl text-pink-400">Beautiful Moments</h3>
+            
+            <div class="polaroid" style="--rot: -5deg">
+                <!-- PASTE GALLERY IMAGE 1 URL IN SRC BELOW -->
+                <img id="gal1-img" src="https://via.placeholder.com/150?text=Moment+1" alt="Moment 1">
+                <p class="text-center mt-2 text-xs text-pink-400 font-bold cursive">Sweetest</p>
+            </div>
+
+            <div class="polaroid" style="--rot: 4deg">
+                <!-- PASTE GALLERY IMAGE 2 URL IN SRC BELOW -->
+                <img id="gal2-img" src="https://via.placeholder.com/150?text=Moment+2" alt="Moment 2">
+                <p class="text-center mt-2 text-xs text-pink-400 font-bold cursive">Cutest</p>
+            </div>
+
+            <p class="text-[12px] text-pink-400 font-bold text-center px-4 cursive mt-2">Love you always! ❤️</p>
+        </aside>
+    </div>
+
+    <!-- Overlay -->
+    <div id="message-box">
+        <div class="text-6xl mb-4">✨🎂✨</div>
+        <h2 class="text-4xl text-pink-500 cursive mb-4">Hooray, Mariyam!</h2>
+        <p class="text-gray-600 text-lg leading-relaxed mb-8">
+            You lit all the candles! Wishing you a purr-fectly wonderful year filled with love, laughter, and everything sweet! 🐾💖
+        </p>
+        <button onclick="closeMessage()" class="bg-gradient-to-r from-pink-400 to-pink-500 text-white font-bold py-3 px-12 rounded-full shadow-lg hover:brightness-110 transition uppercase tracking-widest">
+            Close
+        </button>
+    </div>
+
+    <script>
+        // CONFIGURATION: SET YOUR IMAGE PATHS HERE
+        const IMAGE_PATHS = {
+            main: "https://via.placeholder.com/150?text=Mariyam", // Main circular photo
+            moment1: "download_imresizer.jpg", // Top polaroid
+            moment2: "birthdayinspiration_imresizer.jpg"  // Bottom polaroid
+        };
+
+        const colors = ['#FF6B6B', '#4ECDC4', '#FFE66D', '#FF9F43', '#A29BFE', '#F78FB3', '#74b9ff'];
+        let litCount = 0;
+
+        function loadImages() {
+            document.getElementById('user-photo').src = IMAGE_PATHS.main;
+            document.getElementById('gal1-img').src = IMAGE_PATHS.moment1;
+            document.getElementById('gal2-img').src = IMAGE_PATHS.moment2;
+        }
+
+        function toggleCandle(el) {
+            if (!el.classList.contains('lit')) {
+                el.classList.add('lit');
+                litCount++;
+                const rect = el.getBoundingClientRect();
+                createConfetti(rect.left + rect.width/2, rect.top);
+                if (litCount === 3) celebrate();
+            }
+        }
+
+        function celebrate() {
+            for(let i=0; i<100; i++) setTimeout(() => createConfetti(), i * 20);
+            setTimeout(() => { document.getElementById('message-box').style.display = 'block'; }, 1000);
+        }
+
+        function addBalloon() {
+            const balloon = document.createElement('div');
+            balloon.className = 'balloon';
+            balloon.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+            balloon.style.left = Math.random() * 85 + 'vw';
+            balloon.style.animationDuration = (Math.random() * 5 + 5) + 's';
+            balloon.onclick = (e) => popBalloon(e.target);
+            document.body.appendChild(balloon);
+            setTimeout(() => { if (balloon.parentNode) balloon.remove(); }, 10000);
+        }
+
+        function popBalloon(el) {
+            el.style.transform = 'scale(2)';
+            el.style.opacity = '0';
+            createConfetti(el.offsetLeft + 25, el.offsetTop + 35);
+            setTimeout(() => el.remove(), 200);
+        }
+
+        function meow() {
+            const cat = document.getElementById('birthday-cat');
+            cat.style.transform = 'translateY(-60px) rotate(5deg)';
+            const bubble = document.createElement('div');
+            bubble.innerText = "MEOW! ✨🐾";
+            bubble.className = "absolute -top-20 left-1/2 -translate-x-1/2 bg-white px-8 py-4 rounded-2xl shadow-2xl font-bold text-2xl text-pink-500 border-2 border-pink-100 whitespace-nowrap z-50";
+            cat.appendChild(bubble);
+            setTimeout(() => {
+                cat.style.transform = 'translateY(0) rotate(0)';
+                bubble.remove();
+            }, 1500);
+        }
+
+        function createConfetti(x, y) {
+            const confetti = document.createElement('div');
+            confetti.className = 'absolute w-2 h-2 z-[100]';
+            confetti.style.left = (x || Math.random() * window.innerWidth) + 'px';
+            confetti.style.top = (y || Math.random() * window.innerHeight) + 'px';
+            confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+            confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+            document.body.appendChild(confetti);
+            const destX = (Math.random() - 0.5) * 400;
+            const destY = Math.random() * 500 + 100;
+            confetti.animate([
+                { transform: 'translate(0, 0) rotate(0deg)', opacity: 1 },
+                { transform: `translate(${destX}px, ${destY}px) rotate(${Math.random() * 1000}deg)`, opacity: 0 }
+            ], { duration: 2000 + Math.random() * 1000, easing: 'cubic-bezier(0, .9, .57, 1)' }).onfinish = () => confetti.remove();
+        }
+
+        function closeMessage() { document.getElementById('message-box').style.display = 'none'; }
+        
+        window.onload = () => { 
+            loadImages();
+            
+            // CONFIGURATION: CHANGE THIS NUMBER TO INCREASE INITIAL BALLOONS
+            const initialBalloonCount = 60; 
+            
+            for(let i=0; i < initialBalloonCount; i++) {
+                setTimeout(addBalloon, i * 600); 
+            }
+        };
+    </script>
+</body>
+</html>
